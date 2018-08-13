@@ -4,53 +4,80 @@
       <div class="card-header bg-warning">
         <h4  class="m-b-0 text-white">Other Sample form</h4>
        </div>
-     
-         <!-- <div  class="card-body">
-           <h4 class="card-title">Person Info</h4>
-        </div>
-        <hr> -->
-       
-          <div class="card-body">
-            <div class="row p-t-20">
+       <div class="card-body">
+           <div class="row p-t-10">
+               <div class="col-md-12"><a href="javascript:void(0)" class="btn btn-success addBtn" (click)="open2(content)">Add New User</a></div>
                 <table class="table table-bordered">
-                    <thead>
-                      <tr>
-                        <th >#</th>
-                        <th>First</th>
-                        <th>Last</th>
-                        <th>Handle</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  
-                  
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>First</th>
+                      <th>Last</th>
+                      <th>Handle</th>
+                      <th>Action</th>
+                    </tr> 
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td >1</td>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                      <td>@mdo</td>
+                      <td><a href="" class="btn btn-info btn-sm action">View</a>
+                        <a href="" class="btn btn-info btn-warning btn-sm action"> Edit </a>
+                        <a href="" class="btn btn-info btn-danger btn-sm action">Delete</a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>Jacob</td>
+                      <td>Thornton</td>
+                      <td>@fat</td>
+                      <td><a href="" class="btn btn-info btn-sm action">View</a>
+                        <a href="" class="btn btn-info btn-warning btn-sm action"> Edit </a>
+                        <a href="" class="btn btn-info btn-danger btn-sm action">Delete</a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>Larry the Bird</td>
+                      <td>@twitter</td>
+                      <td>@twitter1</td>
+                      <td><a href="" class="btn btn-info btn-sm action">View</a>
+                        <a href="" class="btn btn-info btn-warning btn-sm action"> Edit </a>
+                        <a href="" class="btn btn-info btn-danger btn-sm action">Delete</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
            </div>
-          
-          
           </div>
-          </div>
-          
-          
-          </div>
-         
+        </div>
+        <!-- Create model  -->
+        <ng-template #content let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title">Modal title</h4>
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+            <form name="addUser" id="addUsers">
+              <div class="row">
+               <div class="col-md-12">
+                       <div class="col-md-4">
+                         <input type="text" name="first_name" id="first_name" class="form-control" placeholder="First Name">
+                       </div>
+                       <div class="col-md-4">
+                         <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Last Name">
+                       </div>
+                  </div>
+                </div>
+            </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+            </div>
+          </ng-template>
          
