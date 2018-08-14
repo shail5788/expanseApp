@@ -15,12 +15,10 @@
     left:86.8%;
     bottom: 10px;
 }
-.modal-content{
-    margin-top:100px!important;
-}
-.modal-dialog{
-    max-width:600px!important;
-}
+
 #addUsers{
     width:100%;
+}
+.popupClass .modal-dialog {
+    margin-top:100px;
 }

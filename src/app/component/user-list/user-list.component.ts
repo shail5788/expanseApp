@@ -6,6 +6,7 @@ import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bo
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css']
+  
 })
 export class UserListComponent implements OnInit {
 
@@ -14,7 +15,7 @@ export class UserListComponent implements OnInit {
   constructor(private modalService: NgbModal, private modalService2: NgbModal) {} 
 
   open2(content) { 
-    this.modalService.open(content).result.then((result) => {
+    this.modalService.open(content,{size:'lg',windowClass:"popupClass" }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
