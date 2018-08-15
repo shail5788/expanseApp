@@ -62,9 +62,10 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
+            <form name="addUser" id="addUsers">
             <div class="modal-body">
            <div class="container">
-            <form name="addUser" id="addUsers">
+          
               <div class="row">
                  <div class="col">
                          <input type="text" name="first_name" id="first_name" class="form-control" placeholder="First Name">
@@ -87,7 +88,7 @@
                              <input type="text" name="password" id="password" class="form-control" placeholder="Password">
                           </div>
                    </div>
-                   <div class="row p-t-10">
+                   <!-- <div class="row p-t-10">
                       <div class="col">
                               <input type="text" name="email" id="email" class="form-control" placeholder="Email Address">
                             </div>
@@ -97,12 +98,14 @@
                            <div class="col">
                                <input type="text" name="password" id="password" class="form-control" placeholder="Password">
                             </div>
-                     </div>
-            </form>
+                     </div> -->
+           
             </div>
             </div>
             <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-warning">Create User</button>
               <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
             </div>
+          </form>
           </ng-template>
          

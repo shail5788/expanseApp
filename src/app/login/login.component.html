@@ -13,10 +13,11 @@
             <button>create</button>
             <p class="message">Already registered? <a href="#">Sign In</a></p>
           </form>
-          <form class="login-form">
-            <input type="text" placeholder="username"/>
-            <input type="password" placeholder="password"/>
-            <button>login</button>
+          <form  #loginForm="ngForm" method="post" (ngSubmit)="submitForm(loginForm.value)" class="login-form">
+            <input type="text" ngModel #username="ngModel" name="username" required  placeholder="username"/>
+            <span><p class='text-danger' *ngIf="!username.valid && !username.pristine">Username is required</p></span>
+            <input type="password"  name="password" ngModel #password="ngModel"  placeholder="password"/>
+            <button type="submit">login</button>
             <p class="message">Not registered? <a href="#">Create an account</a></p>
           </form>
         </div>

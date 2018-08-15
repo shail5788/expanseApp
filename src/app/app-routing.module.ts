@@ -17,8 +17,8 @@ export const Approutes: Routes = [
     path: '',
     component: FullComponent,
     children: [
-        { path: '', redirectTo: '/starter', pathMatch: 'full' },
-        { path: 'starter', loadChildren: './starter/starter.module#StarterModule' },
+        { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+        { path: 'dashboard', loadChildren: './starter/starter.module#StarterModule' },
         { path: 'component', loadChildren: './component/component.module#ComponentsModule' },
         { path: 'user-management', loadChildren: './component/component.module#ComponentsModule' },
     ]
