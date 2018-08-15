@@ -24,6 +24,7 @@ import { CardsComponent } from './card/card.component';
 import { ButtonsComponent } from './buttons/buttons.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { UserListComponent } from './user-list/user-list.component';
+// import { LogoutComponent} from '../login/logout.component';
 
 @NgModule({
   imports: [
@@ -51,7 +52,8 @@ import { UserListComponent } from './user-list/user-list.component';
     CardsComponent,
     ButtonsComponent,
     UserManagementComponent,
-    UserListComponent
+    UserListComponent,
+    // LogoutComponent
   ]
 })
 

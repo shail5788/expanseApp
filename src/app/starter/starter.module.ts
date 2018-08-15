@@ -4,13 +4,16 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { StarterComponent } from './starter.component';
+// import {LogoutComponent} from '../login/logout.component';
 
 
-const routes: Routes = [{
+const routes: Routes = [
+	
+	{
 	path: '',
 	data: {
         title: 'Dashboard',
-        urls: [{title: 'Dashboard',url: '/dashboard'},{title: ''}]
+        //urls: [{title: 'Dashboard',url: '/dashboard'},{title: ''}]
     },
 	component: StarterComponent
 }];
