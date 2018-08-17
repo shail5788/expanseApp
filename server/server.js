@@ -59,7 +59,7 @@ apiRoutes.get('/', function(req, res) {
 });
 
 apiRoutes.get('/user/:id', user.getuserDetails); // API returns user details 
-
+apiRoutes.get("/user-list",user.getUserList);
 apiRoutes.put('/user/:id', user.updateUser); // API updates user details
 
 apiRoutes.put('/password/:id', user.updatePassword); // API updates user password

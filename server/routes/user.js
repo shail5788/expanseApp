@@ -105,7 +105,12 @@ exports.authenticate = function(req, res, next){
 		});
 	}
 }
-
+exports.getUserList=function(req,res,next){
+    User.find({},{password:false}).exec(function(err,users){
+         if(err){res.status(400).json({success:false,message:'Error processing request'+err})};
+         res.status(200).json({success:true,data:users})
+     });
+}
 exports.getuserDetails = function(req, res, next){
     User.find({_id:req.params.id}).exec(function(err, user){
         if(err){ res.status(400).json({ success: false, message: 'Error processing request '+ err}); }
@@ -115,7 +120,6 @@ exports.getuserDetails = function(req, res, next){
 	});
     });
 }
-
 exports.updateUser = function(req, res, next){
     const firstname = req.body.firstname;
     const lastname = req.body.lastname;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
 import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-
+import { UsersService }  from '../../services/users.service';                   
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
@@ -11,8 +11,8 @@ import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bo
 export class UserListComponent implements OnInit {
 
   closeResult: string;
-	
-  constructor(private modalService: NgbModal, private modalService2: NgbModal) {} 
+	userList;
+  constructor(private modalService: NgbModal, private modalService2: NgbModal,private UsersService:UsersService) {} 
 
   open2(content) { 
     this.modalService.open(content,{size:'lg',windowClass:"popupClass" }).result.then((result) => {
@@ -36,6 +36,11 @@ export class UserListComponent implements OnInit {
 
 
   ngOnInit() {
+   this.UsersService.getUsersList().subscribe(
+     res=>{this.userList=res},
+     err=>{}
+    );
+   console.log(this.userList);
   }
 
 }

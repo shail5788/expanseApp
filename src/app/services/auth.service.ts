@@ -52,6 +52,9 @@ public logout(): void {
     this.currentUser = null;
     localStorage.removeItem('currentUser');
 }
+public getAccessToken(){
+  return JSON.parse(localStorage.getItem('currentUser')).token;
+}
 private handleError(error: Response) {
   console.error(error);
   return Observable.throw(error.json().error || 'Server error');

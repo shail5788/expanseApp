@@ -77,11 +77,13 @@
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/pace-js/pace.min.js"
+              "node_modules/pace-js/pace.min.js",
+              "node_modules/toastr/toastr.min.js"
             ],
             "styles": [
               "src/styles.css",
-              "src/assets/scss/style.scss"
+              "src/assets/scss/style.scss",
+              "node_modules/toastr/toastr.min.css"
             ],
             "assets": [
               "src/assets",
