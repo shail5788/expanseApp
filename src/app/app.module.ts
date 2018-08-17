@@ -26,6 +26,7 @@ import { LogoutComponent } from './login/logout.component';
 
 import {AuthService }from './services/auth.service';
 import {ToastrService} from './services/toastr.service';
+import {AuthGuard} from './services/auth.guard';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -62,7 +63,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     },{
     provide: LocationStrategy,
     useClass: HashLocationStrategy
-  },AuthService,ToastrService],
+  },AuthService,ToastrService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
