@@ -59,11 +59,13 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   providers: [
       {
       provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    },{
-    provide: LocationStrategy,
-    useClass: HashLocationStrategy
-  },AuthService,ToastrService,AuthGuard],
-  bootstrap: [AppComponent]
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
+    },
+    {
+     provide: LocationStrategy,
+     useClass: HashLocationStrategy
+    }
+  ,AuthService,ToastrService,AuthGuard],
+   bootstrap: [AppComponent]
 })
 export class AppModule { }

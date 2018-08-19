@@ -2,51 +2,34 @@
 <div class="col-lg-12">
     <div class="card">
       <div class="card-header bg-warning">
-        <h4  class="m-b-0 text-white">Other Sample form</h4>
+        <h4  class="m-b-0 text-white">User List</h4>
        </div>
        <div class="card-body">
            <div class="row p-t-10">
-               <div class="col-md-12"><a href="javascript:void(0)" class="btn btn-success addBtn" (click)="open2(content)">Add New User</a></div>
-                <table class="table table-bordered">
+              <div class="col-md-12"><a href="javascript:void(0)" class="btn btn-success addBtn" (click)="open2(content)">Add New User</a></div>
+               <table class="table table-bordered">
                   <thead>
                     <tr>
-                      <th>#</th>
-                      <th>First</th>
-                      <th>Last</th>
-                      <th>Handle</th>
+                      <th>User ID</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Email</th>
+                      <th>Username</th>
                       <th>Action</th>
                     </tr> 
                   </thead>
                   <tbody>
-                    <tr>
-                      <td >1</td>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                      <td><a href="" class="btn btn-info btn-sm action">View</a>
-                        <a href="" class="btn btn-info btn-warning btn-sm action"> Edit </a>
-                        <a href="" class="btn btn-info btn-danger btn-sm action">Delete</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
-                      <td>@fat</td>
-                      <td><a href="" class="btn btn-info btn-sm action">View</a>
-                        <a href="" class="btn btn-info btn-warning btn-sm action"> Edit </a>
-                        <a href="" class="btn btn-info btn-danger btn-sm action">Delete</a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Larry the Bird</td>
-                      <td>@twitter</td>
-                      <td>@twitter1</td>
-                      <td><a href="" class="btn btn-info btn-sm action">View</a>
-                        <a href="" class="btn btn-info btn-warning btn-sm action"> Edit </a>
-                        <a href="" class="btn btn-info btn-danger btn-sm action">Delete</a>
-                      </td>
+                    <tr *ngFor="let user of UsersService.usersArr">
+                      <td >{{user._id}}</td>
+                      <td>{{user.firstname}}</td>
+                      <td>{{user.lastname}}</td>
+                      <td>{{user.email}}</td>
+                      <td>{{user.username}}</td>
+                      <td>
+                          <a href="" class="btn btn-info btn-sm action">View</a>
+                          <a href="" class="btn btn-info btn-warning btn-sm action"> Edit </a>
+                          <a href="" class="btn btn-info btn-danger btn-sm action">Delete</a>
+                       </td>
                     </tr>
                   </tbody>
                 </table>
@@ -62,49 +45,72 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form name="addUser" id="addUsers">
-            <div class="modal-body">
+          <form #userForm="ngForm" (ngSubmit)="registerUser(userForm)">
+          <div class="modal-body">
            <div class="container">
-          
-              <div class="row">
-                 <div class="col">
-                         <input type="text" name="first_name" id="first_name" class="form-control" placeholder="First Name">
-                       </div>
-                       <div class="col">
-                         <input type="text" name="mid_name" id="mid_name" class="form-control" placeholder="Middle Name">
-                      </div>
-                      <div class="col">
-                          <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Last Name">
-                       </div>
-                </div>
-                <div class="row p-t-10">
+                <div class="row">
                     <div class="col">
-                            <input type="text" name="email" id="email" class="form-control" placeholder="Email Address">
+                        
+                        <div class="form-group">
+                          <input type="text" name="firstname" ngModel #Userfirstname="ngModel" class="form-control" placeholder="First Name" required >
+                          <span *ngIf="Userfirstname.touched"  style="font-size:11px;color:red; font-weight: bold">
+                              <span class="text-danger" *ngIf="Userfirstname.errors?.required">First name is required</span>
+                          </span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <input type="text" name="lastname" ngModel #Userlastname="ngModel" class="form-control" placeholder="Last Name" required>
+                            <span *ngIf="Userlastname.touched"   style="font-size:11px;color:red; font-weight: bold">
+                                <span class="text-danger" *ngIf="Userlastname.errors?.required">Last name is required</span>
+                            </span>
                           </div>
-                          <div class="col">
-                            <input type="text" name="mobile" id="mobile" class="form-control" placeholder="Mobile">
-                         </div>
-                         <div class="col">
-                             <input type="text" name="password" id="password" class="form-control" placeholder="Password">
+                    </div>
+                    <div class="col">
+                      <div class="form-group">
+                          <input type="text" name="username" ngModel #username="ngModel" class="form-control" placeholder="Username" required>
+                          <span *ngIf="username.touched"  style="font-size:11px;color:red; font-weight: bold">
+                              <span class="text-danger" *ngIf="username.errors?.required">Username is required</span>
+                          </span>
+                        </div>
+                    </div>
+                  </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                          <input type="text" name="email" ngModel #Useremail="ngModel" class="form-control" placeholder="Email Address" required 
+                          pattern='^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'>
+                          <span *ngIf="Useremail.touched"  style="font-size:11px;color:red; font-weight: bold">
+                              <span class="text-danger" *ngIf="Useremail.errors?.required">Email is required</span>
+                              <span class="text-danger" *ngIf="Useremail.errors?.pattern">Invalid email address</span>
+                          </span>
+                        </div>
+                     </div>
+                     <div class="col">
+                        <div class="form-group">
+                            <input type="text" name="password" ngModel #Userpassword="ngModel" class="form-control" placeholder="Password" required>
+                            <span *ngIf="Userpassword.touched"  style="font-size:11px;color:red; font-weight: bold">
+                                <span class="text-danger" *ngIf="Userpassword.errors?.required">Password is required</span>
+                            </span>
                           </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group">
+                          <input type="text" name="mobile" ngModel #Usermobile="ngModel"  class="form-control" placeholder="Mobile" required pattern="[0-9]*" minlength="10" maxlength="12">
+                          <span *ngIf="Usermobile.touched"  style="font-size:11px;color:red; font-weight: bold">
+                              <span class="text-danger" *ngIf="Usermobile.errors?.required">Mobile is required</span>
+                              <span class="text-danger" *ngIf="Usermobile.errors?.pattern">Only Numeric value</span>
+                              <span class="text-danger" *ngIf="Usermobile.errors?.minlength">At least 10 digits </span>
+                              <span class="text-danger" *ngIf="Usermobile.errors?.maxlength">Maximum 12 digits</span>
+                          </span>
+                        </div>
+                    </div>
                    </div>
-                   <!-- <div class="row p-t-10">
-                      <div class="col">
-                              <input type="text" name="email" id="email" class="form-control" placeholder="Email Address">
-                            </div>
-                            <div class="col">
-                              <input type="text" name="mobile" id="mobile" class="form-control" placeholder="Mobile">
-                           </div>
-                           <div class="col">
-                               <input type="text" name="password" id="password" class="form-control" placeholder="Password">
-                            </div>
-                     </div> -->
-           
-            </div>
+              </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn-warning">Create User</button>
-              <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+              <button type="submit" class="btn btn-secondary btn-warning" [disabled]="userForm.invalid">Create User</button>
+              <button type="button" class="btn btn-secondary" (click)="c('Close click')" >Close</button>
             </div>
           </form>
           </ng-template>

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { JsonpModule } from '@angular/Http';
+import { JsonpModule } from '@angular/http';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -24,6 +24,7 @@ import { CardsComponent } from './card/card.component';
 import { ButtonsComponent } from './buttons/buttons.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { UserListComponent } from './user-list/user-list.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
 // import { LogoutComponent} from '../login/logout.component';
 
 @NgModule({
@@ -53,6 +54,7 @@ import { UserListComponent } from './user-list/user-list.component';
     ButtonsComponent,
     UserManagementComponent,
     UserListComponent,
+    UserEditComponent,
     // LogoutComponent
   ]
 })
