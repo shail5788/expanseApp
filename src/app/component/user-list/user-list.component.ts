@@ -4,6 +4,7 @@ import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bo
 import { UsersService }  from '../../services/users.service';   
 import {ToastrService} from '../../services/toastr.service';
 import {User} from "../../services/user.model"
+import { Subject } from 'rxjs';
 // import {User} from './user';                
 @Component({
   selector: 'app-user-list',
@@ -12,10 +13,12 @@ import {User} from "../../services/user.model"
   
 })
 export class UserListComponent implements OnInit {
-
+  
+  dtOptions: DataTables.Settings = {};
   closeResult: string;
   userList:any[] = [];
   //user:User[]=[];
+  dtTrigger:Subject<any> = new Subject();
   constructor(private modalService: NgbModal, private modalService2: NgbModal,private UsersService:UsersService,private toastr:ToastrService) {} 
 
   open2(content) { 
@@ -43,15 +46,27 @@ export class UserListComponent implements OnInit {
 
 
   ngOnInit() {
-      this.renderData();
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10
+    };
+      //this.renderData();
+      this.UsersService.getUsersList().subscribe((response:any)=>{
+        response=response.json();
+        this.userList=response.data;
+        this.UsersService.usersArr=response.data as User[];
+        this.dtTrigger.next();
+         console.log(this.UsersService.usersArr)
+      });
+     
       
   }
  renderData(){
   this.UsersService.getUsersList().subscribe((response:any)=>{
-    response=response.json();
+      response=response.json();
       this.userList=response.data;
       this.UsersService.usersArr=response.data as User[];
-      console.log(this.UsersService.usersArr)
+       console.log(this.UsersService.usersArr)
     });
  }
   public registerUser(form){

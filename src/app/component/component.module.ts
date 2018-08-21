@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JsonpModule } from '@angular/http';
+import { DataTablesModule } from 'angular-datatables';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -34,7 +35,9 @@ import { UserEditComponent } from './user-edit/user-edit.component';
     FormsModule,
     ReactiveFormsModule,
     JsonpModule,
-    NgbModule
+    NgbModule,
+    DataTablesModule
+
   ],
   declarations: [
     NgbdpregressbarBasic,

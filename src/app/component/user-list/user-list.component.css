@@ -26,3 +26,13 @@
     font-size: 10px;
     color:red;
 }
+table.dataTable.no-footer{
+     border-bottom: 1px solid; 
+}
+table.dataTable {
+    width: 100%;
+    margin: 0 auto;
+    clear: both;
+    border-collapse: separate;
+    border-spacing: 0;
+}
