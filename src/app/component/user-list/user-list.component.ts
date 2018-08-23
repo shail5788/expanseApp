@@ -17,6 +17,7 @@ export class UserListComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   closeResult: string;
   userList:any[] = [];
+  currentUser:Object;
   //user:User[]=[];
   dtTrigger:Subject<any> = new Subject();
   constructor(private modalService: NgbModal, private modalService2: NgbModal,private UsersService:UsersService,private toastr:ToastrService) {} 
@@ -25,6 +26,14 @@ export class UserListComponent implements OnInit {
   
     
     this.modalService.open(content,{size:'lg',windowClass:"popupClass" }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  viewOpen(viewcontent){
+    this.modalService.open(viewcontent,{windowClass:"popupClass" }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
       
     }, (reason) => {
@@ -81,6 +90,11 @@ export class UserListComponent implements OnInit {
         }
     },
     err=>{});
+  }
+  public getUserDetail(user,viewcontent){
+    this.currentUser=user;
+    console.log(this.currentUser);
+    this.viewOpen(viewcontent)
   }   
 
 }

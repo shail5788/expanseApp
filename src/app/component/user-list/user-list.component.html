@@ -26,9 +26,9 @@
                       <td>{{user.email}}</td>
                       <td>{{user.username}}</td>
                       <td>
-                          <a href="" class="btn btn-info btn-sm action">View</a>
-                          <a href="" class="btn btn-info btn-warning btn-sm action"> Edit </a>
-                          <a href="" class="btn btn-info btn-danger btn-sm action">Delete</a>
+                          <a href="javascript:void(0)" (click)="getUserDetail(user,viewcontent)" class="btn btn-info btn-sm action">View</a>
+                          <a href="javascript:void(0)" class="btn btn-info btn-warning btn-sm action"> Edit </a>
+                          <a href="javascript:void(0)" class="btn btn-info btn-danger btn-sm action">Delete</a>
                        </td>
                     </tr>
                   </tbody>
@@ -114,4 +114,53 @@
             </div>
           </form>
           </ng-template>
-         
+         <!-- view Model -->
+                 <!-- Create model  -->
+        <ng-template #viewcontent let-c="close" let-d="dismiss">
+          <div class="modal-header">
+            <h4 class="modal-title">View User Detail</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+       
+        <div class="modal-body">
+         <div class="container">
+              <div class="row">
+                  <div class="card profile-content" style="width:400px;margin-left:30px;">
+                      <img class="card-img-top" src="assets/images/users/d4.jpg" alt="Card image" width="200" height="270">
+                      <div class="card-body">
+                        <h3 class="card-title">{{currentUser.firstname}} {{currentUser.lastname}}</h3>
+                       <p class="card-text"> <span class="profile">Email-</span>  {{currentUser.email}}</p>
+                       <p class="card-text"> <span class="profile">Username-</span>  {{currentUser.username}}</p>
+                        <a href="#" class="btn btn-primary">See Profile</a>
+                      </div>
+                    </div>
+                 <!-- <table class="table table-bordered">
+                   <tr>
+                      <th><span>First Name</span></th>
+                      <td>{{currentUser.firstname}}</td>
+                      <th><span>Last Name</span></th>
+                      <td>{{currentUser.lastname}}</td>
+                      <td rowspan="3">image</td>
+                   </tr>
+                   <tr>
+                      <th><span>Email Address</span></th>
+                      <td>{{currentUser.email}}</td>
+                      <th><span>Username</span></th>
+                      <td>{{currentUser.username}}</td>
+                   </tr>
+                   
+                 </table>
+                  -->
+                </div>
+             
+            </div>
+          </div>
+          <div class="modal-footer">
+            
+            <button type="button" class="btn btn-secondary" (click)="c('Close click')" >Close</button>
+          </div>
+        
+        </ng-template>
+       

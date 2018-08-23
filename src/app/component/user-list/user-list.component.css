@@ -36,3 +36,9 @@ table.dataTable {
     border-collapse: separate;
     border-spacing: 0;
 }
+.profile-content{
+    border: 1px solid lightgray;
+}
+.card-text span {
+    font-weight: 700;
+}
