@@ -13,6 +13,7 @@ import 'rxjs/add/observable/throw';
 })
 export class UsersService {
   selectUser:User;
+  
   usersArr:User[];
   constructor(private http:Http) {}
   public getUsersList(){
@@ -30,6 +31,23 @@ export class UsersService {
         (response:Response)=>{
            response.json();
       }).catch(this.handleError);
+  }
+  public getUserById(user){
+     const LoggedUser=localStorage.getItem('currentUser');
+      let headers=new Headers({'Content-Type':'application/json',"Authorization":JSON.parse(LoggedUser).token});
+      let options=new RequestOptions({headers:headers});
+      return this.http.get(`http://localhost:1978/api/user/${user}`,options).do(
+        (response:Response)=>{response.json();
+      }).catch(this.handleError)
+  }
+  public updateUserInfo(user){
+  
+  const LoggedUser=localStorage.getItem('currentUser');
+  
+  let headers=new Headers({'Content-Type':'application/json',"Authorization":JSON.parse(LoggedUser).token});
+  let options=new RequestOptions({headers:headers});
+ // console.log(user)
+      return this.http.post("http://localhost:1978/api/user-update",JSON.stringify(user),options);
   }
   private handleError(error: Response) {
     console.error(error);

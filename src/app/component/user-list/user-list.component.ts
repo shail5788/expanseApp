@@ -17,7 +17,7 @@ export class UserListComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   closeResult: string;
   userList:any[] = [];
-  currentUser:Object;
+  currentUser:any;
   //user:User[]=[];
   dtTrigger:Subject<any> = new Subject();
   constructor(private modalService: NgbModal, private modalService2: NgbModal,private UsersService:UsersService,private toastr:ToastrService) {} 
@@ -34,6 +34,14 @@ export class UserListComponent implements OnInit {
   }
   viewOpen(viewcontent){
     this.modalService.open(viewcontent,{windowClass:"popupClass" }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  editModelOpen(editcontent){
+    this.modalService.open(editcontent,{size:'lg',windowClass:"popupClass" }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
       
     }, (reason) => {
@@ -65,7 +73,7 @@ export class UserListComponent implements OnInit {
         this.userList=response.data;
         this.UsersService.usersArr=response.data as User[];
         this.dtTrigger.next();
-         console.log(this.UsersService.usersArr)
+        //  console.log(this.UsersService.usersArr)
       });
      
       
@@ -75,14 +83,15 @@ export class UserListComponent implements OnInit {
       response=response.json();
       this.userList=response.data;
       this.UsersService.usersArr=response.data as User[];
-       console.log(this.UsersService.usersArr)
+      //  console.log(this.UsersService.usersArr)
     });
  }
   public registerUser(form){
     // this.user=form.value;
-    this.UsersService.registerUser(form.value).subscribe(
+    this.UsersService.registerUser(form.value)
+    .subscribe(
       response=>{
-        console.log(response.json())
+        // console.log(response.json())
         if(response.status){
           this.renderData();
           this.toastr.success("User Created Successfully!");
@@ -92,9 +101,26 @@ export class UserListComponent implements OnInit {
     err=>{});
   }
   public getUserDetail(user,viewcontent){
-    this.currentUser=user;
-    console.log(this.currentUser);
+    
+    // console.log(user);
+    this.UsersService.getUserById(user._id).subscribe(response=>{
+        response= response.json().data;
+        this.currentUser=response[0];
+        console.log(this.currentUser)
+    });
     this.viewOpen(viewcontent)
   }   
-
+  public showUserEdit(user,editcontent){
+     this.currentUser=user ;
+    this.editModelOpen(editcontent);
+  }
+  public UpdateUser(form){
+    this.UsersService.updateUserInfo(form.value).subscribe(response=>{
+       if(response.status){
+         console.log(response);
+          this.renderData();
+          this.toastr.success("User Update successfully !");
+       }
+    })
+  }
 }

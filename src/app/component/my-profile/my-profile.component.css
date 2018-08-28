@@ -1,0 +1,14 @@
+#profileForm{
+    width: 100%;
+}
+.profile-info{
+    float: left;
+}
+.rightBar{
+    background-image: linear-gradient(to right top, #f1f7f8, #f0f4f6, #f0f2f3, #efeff0, #ededed);
+    height: 600px;
+    max-height: 650px;
+    border-radius: 10px;
+    padding: 10px;
+
+}

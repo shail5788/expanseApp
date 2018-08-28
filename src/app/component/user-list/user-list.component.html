@@ -27,7 +27,7 @@
                       <td>{{user.username}}</td>
                       <td>
                           <a href="javascript:void(0)" (click)="getUserDetail(user,viewcontent)" class="btn btn-info btn-sm action">View</a>
-                          <a href="javascript:void(0)" class="btn btn-info btn-warning btn-sm action"> Edit </a>
+                          <a href="javascript:void(0)" (click)="showUserEdit(user,editcontent)" class="btn btn-info btn-warning btn-sm action"> Edit </a>
                           <a href="javascript:void(0)" class="btn btn-info btn-danger btn-sm action">Delete</a>
                        </td>
                     </tr>
@@ -115,7 +115,6 @@
           </form>
           </ng-template>
          <!-- view Model -->
-                 <!-- Create model  -->
         <ng-template #viewcontent let-c="close" let-d="dismiss">
           <div class="modal-header">
             <h4 class="modal-title">View User Detail</h4>
@@ -133,29 +132,12 @@
                         <h3 class="card-title">{{currentUser.firstname}} {{currentUser.lastname}}</h3>
                        <p class="card-text"> <span class="profile">Email-</span>  {{currentUser.email}}</p>
                        <p class="card-text"> <span class="profile">Username-</span>  {{currentUser.username}}</p>
+                       <p class="card-text"> <span class="profile">Mobile-</span>  {{currentUser.mobile}}</p>
                         <a href="#" class="btn btn-primary">See Profile</a>
                       </div>
                     </div>
-                 <!-- <table class="table table-bordered">
-                   <tr>
-                      <th><span>First Name</span></th>
-                      <td>{{currentUser.firstname}}</td>
-                      <th><span>Last Name</span></th>
-                      <td>{{currentUser.lastname}}</td>
-                      <td rowspan="3">image</td>
-                   </tr>
-                   <tr>
-                      <th><span>Email Address</span></th>
-                      <td>{{currentUser.email}}</td>
-                      <th><span>Username</span></th>
-                      <td>{{currentUser.username}}</td>
-                   </tr>
-                   
-                 </table>
-                  -->
-                </div>
-             
-            </div>
+                 </div>
+              </div>
           </div>
           <div class="modal-footer">
             
@@ -163,4 +145,74 @@
           </div>
         
         </ng-template>
+         <!-- Create edit model  -->
+         <ng-template #editcontent let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title">Edit User</h4>
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          <form #userEditForm="ngForm" (ngSubmit)="UpdateUser(userEditForm)">
+          <div class="modal-body">
+           <div class="container">
+                <div class="row">
+                    <div class="col">
+                       <input type="hidden" name="userid" ngModel #userId="ngModel" [(ngModel)]="currentUser._id" >
+                        <div class="form-group">
+                          <input type="text" name="firstname" ngModel #Userfirstname="ngModel" class="form-control" placeholder="First Name" required [(ngModel)]="currentUser.firstname">
+                          <span *ngIf="Userfirstname.touched"  style="font-size:11px;color:red; font-weight: bold">
+                              <span class="text-danger" *ngIf="Userfirstname.errors?.required">First name is required</span>
+                          </span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <input type="text" name="lastname" ngModel #Userlastname="ngModel" class="form-control" placeholder="Last Name" required [(ngModel)]="currentUser.lastname">
+                            <span *ngIf="Userlastname.touched"   style="font-size:11px;color:red; font-weight: bold">
+                                <span class="text-danger" *ngIf="Userlastname.errors?.required">Last name is required</span>
+                            </span>
+                          </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group">
+                          <input type="text" name="username" ngModel #username="ngModel" class="form-control" placeholder="Username" required disabled [(ngModel)]="currentUser.username">
+                          <span *ngIf="username.touched"  style="font-size:11px;color:red; font-weight: bold">
+                              <span class="text-danger" *ngIf="username.errors?.required">Username is required</span>
+                          </span>
+                        </div>
+                    </div>
+                  </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                          <input type="text" name="email" ngModel #Useremail="ngModel" class="form-control" placeholder="Email Address" required 
+                          pattern='^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$' [(ngModel)]="currentUser.email">
+                          <span *ngIf="Useremail.touched"  style="font-size:11px;color:red; font-weight: bold">
+                              <span class="text-danger" *ngIf="Useremail.errors?.required">Email is required</span>
+                              <span class="text-danger" *ngIf="Useremail.errors?.pattern">Invalid email address</span>
+                          </span>
+                        </div>
+                     </div>
+                     
+                    <div class="col">
+                      <div class="form-group">
+                          <input type="text" name="mobile" ngModel #Usermobile="ngModel"  class="form-control" placeholder="Mobile" required pattern="[0-9]*" minlength="10" maxlength="12" [(ngModel)]="currentUser.mobile">
+                          <span *ngIf="Usermobile.touched"  style="font-size:11px;color:red; font-weight: bold">
+                              <span class="text-danger" *ngIf="Usermobile.errors?.required">Mobile is required</span>
+                              <span class="text-danger" *ngIf="Usermobile.errors?.pattern">Only Numeric value</span>
+                              <span class="text-danger" *ngIf="Usermobile.errors?.minlength">At least 10 digits </span>
+                              <span class="text-danger" *ngIf="Usermobile.errors?.maxlength">Maximum 12 digits</span>
+                          </span>
+                        </div>
+                    </div>
+                   </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-secondary btn-warning" [disabled]="userEditForm.invalid">Update User</button>
+              <button type="button" class="btn btn-secondary" (click)="c('Close click')" >Close</button>
+            </div>
+          </form>
+          </ng-template>
        

@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit ,OnInit} from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbPanelChangeEvent, NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 declare var $: any;
 @Component({
@@ -6,11 +6,15 @@ declare var $: any;
   templateUrl: './navigation.component.html'
 })
 export class NavigationComponent implements AfterViewInit {
-	name:string;
+    name:string;
+    loggedUser:Object;
   	constructor(private modalService: NgbModal) {
     	
     }
-      
+     ngOnInit(){
+        this.loggedUser=JSON.parse(localStorage.getItem("currentUser"));
+        console.log(this.loggedUser);
+     } 
     ngAfterViewInit() {
         
         var set = function() {

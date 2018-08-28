@@ -26,6 +26,7 @@ import { ButtonsComponent } from './buttons/buttons.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 // import { LogoutComponent} from '../login/logout.component';
 
 @NgModule({
@@ -58,6 +59,7 @@ import { UserEditComponent } from './user-edit/user-edit.component';
     UserManagementComponent,
     UserListComponent,
     UserEditComponent,
+    MyProfileComponent,
     // LogoutComponent
   ]
 })

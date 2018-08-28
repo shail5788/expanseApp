@@ -30,6 +30,7 @@ export const Approutes: Routes = [
         { path: '' ,redirectTo: '/dashboard', pathMatch: 'full' },
         { path: 'dashboard',canActivate:[AuthGuard], loadChildren: './starter/starter.module#StarterModule' },
         { path: 'component', loadChildren: './component/component.module#ComponentsModule' },
+        { path: 'profile', loadChildren: './component/component.module#ComponentsModule' },
         { path: 'user-management', canActivate:[AuthGuard], loadChildren: './component/component.module#ComponentsModule' },
     ]
 }

@@ -18,6 +18,7 @@ import { ButtonsComponent } from './buttons/buttons.component';
 import {UserManagementComponent} from './user-management/user-management.component';
 import { UserListComponent } from './user-list/user-list.component';
 import {LogoutComponent} from '../login/logout.component';
+import {MyProfileComponent} from './my-profile/my-profile.component';
 
 export const ComponentsRoutes: Routes = [
  
@@ -46,6 +47,14 @@ export const ComponentsRoutes: Routes = [
       data: {
         title: 'User List',
         urls: [{title: 'Dashboard',url: '/dashboard'},{title: 'User Management'},{title: 'User List'}]
+      }
+    },
+    {
+      path: 'my-profile',
+      component: MyProfileComponent,
+      data: {
+        title: 'My Profile',
+        urls: [{title: 'Dashboard',url: '/dashboard'},{title: 'Profile'},{title: 'My Profile'}]
       }
     },
     {

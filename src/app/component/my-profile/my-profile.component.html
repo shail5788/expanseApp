@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+             <div class="row">
+              <form ngForm="profle" id="profileForm">
+                <div class="col-md-12">
+                    <div class="col-md-8 profile-info">
+                         <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" class="form-control" name="firstname" ngModel #Userfirstname="ngModel">
+                         </div>
+                         <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" class="form-control" name="lastname" ngModel #Userlastname="ngModel">
+                         </div>
+                         <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" class="form-control" name="username" ngModel #Userusername="ngModel">
+                         </div>
+                         <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="text" class="form-control" name="email" ngModel #Useremail="ngModel">
+                         </div>
+                         <div class="form-group">
+                            <label for="mobile">Mobile</label>
+                            <input type="text" class="form-control" name="mobile" ngModel #Usermobile="ngModel">
+                         </div>
+                         <div class="form-group">
+                           <button type="submit" class="btn btn-warning">Update Profile</button>
+                         </div>
+                      </div>
+                      <div class="col-md-4 rightBar" style="float:right">
+                         <div class="form-group">
+                            <input type="file" name="image" ngModel #userImage="ngModel">
+                         </div>
+                      </div>
+                </div>
+                </form>
+             </div>
+              
+              
+          </div>
+      </div>
+  </div>
+</div>

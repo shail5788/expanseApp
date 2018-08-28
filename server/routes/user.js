@@ -11,6 +11,7 @@ exports.signup = function(req, res, next){
     const email = req.body.email;
     const username = req.body.username;
     const password = req.body.password;
+    const mobile=req.body.mobile;
 
     if (!firstname || !lastname || !email || !username || !password) {
         return res.status(422).json({ success: false, message: 'Posted data is not correct or incomplete.'});
@@ -33,7 +34,8 @@ exports.signup = function(req, res, next){
             lastname: lastname,
             email: email,
             username: username,
-            password: password
+            password: password,
+            mobile:mobile
         });
 
         oUser.save(function(err, oUser) {
@@ -112,7 +114,9 @@ exports.getUserList=function(req,res,next){
      });
 }
 exports.getuserDetails = function(req, res, next){
+    //console.log(req);
     User.find({_id:req.params.id}).exec(function(err, user){
+       // console.log(user)
         if(err){ res.status(400).json({ success: false, message: 'Error processing request '+ err}); }
         res.status(201).json({
 		success: true, 
@@ -124,7 +128,8 @@ exports.updateUser = function(req, res, next){
     const firstname = req.body.firstname;
     const lastname = req.body.lastname;
     const email = req.body.email;
-	const userid = req.params.id;
+    const mobile=req.body.mobile;
+	const userid =req.body.userid;
 
     if (!firstname || !lastname || !email || !userid) {
         return res.status(422).json({ success: false, message: 'Posted data is not correct or incompleted.'});
@@ -135,7 +140,8 @@ exports.updateUser = function(req, res, next){
 		if(user){
 			user.firstname = firstname;
 			user.lastname = lastname;
-			user.email = email;
+            user.email = email;
+            user.mobile=mobile;
 		}
 		user.save(function(err){
 			if(err){ res.status(400).json({ success: false, message:'Error processing request '+ err }); }
