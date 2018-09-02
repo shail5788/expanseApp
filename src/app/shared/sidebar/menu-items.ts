@@ -9,7 +9,7 @@ export const ROUTES: RouteInfo[] = [
     },
      {
         path: '', title: 'My Profile', icon: '', class: 'nav-small-cap', label: '', labelClass: '', extralink: true, submenu: [
-            { path: '/profile/my-profile', title: 'Profile', icon: '', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
+            { path: '/profile/my-profile', title: 'My Profile', icon: '', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
         ]
      },
     // {

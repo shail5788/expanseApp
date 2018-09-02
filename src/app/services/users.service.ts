@@ -41,13 +41,23 @@ export class UsersService {
       }).catch(this.handleError)
   }
   public updateUserInfo(user){
-  
-  const LoggedUser=localStorage.getItem('currentUser');
-  
-  let headers=new Headers({'Content-Type':'application/json',"Authorization":JSON.parse(LoggedUser).token});
-  let options=new RequestOptions({headers:headers});
- // console.log(user)
+      const LoggedUser=localStorage.getItem('currentUser');
+      let headers=new Headers({'Content-Type':'application/json',"Authorization":JSON.parse(LoggedUser).token});
+      let options=new RequestOptions({headers:headers});
       return this.http.post("http://localhost:1978/api/user-update",JSON.stringify(user),options);
+  }
+  public updateUserProfile(user){
+    const LoggedUser=localStorage.getItem('currentUser');
+    let headers=new Headers({'Content-Type':'application/json',"Authorization":JSON.parse(LoggedUser).token});
+    let options=new RequestOptions({headers:headers});
+    return this.http.put(`http://localhost:1978/api/profile-update/${user._id}`,JSON.stringify(user),options);
+  }
+  public uploadImage(image:File){
+    let headers=new Headers({"Authorization":JSON.parse(localStorage.getItem('currentUser')).token});
+    let options=new RequestOptions({headers:headers});
+    const formData= new FormData();
+    formData.append('image',image,image.name);
+    return this.http.post("http://localhost:1978/api/upload-image",formData,options);
   }
   private handleError(error: Response) {
     console.error(error);

@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JsonpModule } from '@angular/http';
 import { DataTablesModule } from 'angular-datatables';
-
+import {FileUploadModule} from 'ng2-file-upload';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { ComponentsRoutes } from './component.routing';
@@ -37,6 +37,7 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
     ReactiveFormsModule,
     JsonpModule,
     NgbModule,
+    FileUploadModule,
     DataTablesModule
 
   ],

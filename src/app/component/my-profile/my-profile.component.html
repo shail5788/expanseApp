@@ -3,36 +3,40 @@
       <div class="card">
           <div class="card-body">
              <div class="row">
-              <form ngForm="profle" id="profileForm">
+              <form ngForm="profle" id="profileForm" *ngIf='user'>
                 <div class="col-md-12">
                     <div class="col-md-8 profile-info">
+                        <input type="hidden" name="userid" ngModel #UserId="ngModel" [(ngModel)]="user._id">
                          <div class="form-group">
                             <label for="firstName">First Name</label>
-                            <input type="text" class="form-control" name="firstname" ngModel #Userfirstname="ngModel">
+                            <input type="text" class="form-control" name="firstname" ngModel #Userfirstname="ngModel" [(ngModel)]="user.firstname">
                          </div>
                          <div class="form-group">
                             <label for="lastName">Last Name</label>
-                            <input type="text" class="form-control" name="lastname" ngModel #Userlastname="ngModel">
+                            <input type="text" class="form-control" name="lastname" ngModel #Userlastname="ngModel"  [(ngModel)]="user.lastname">
                          </div>
                          <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" class="form-control" name="username" ngModel #Userusername="ngModel">
+                            <input type="text" class="form-control" name="username" ngModel #Userusername="ngModel"  [(ngModel)]="user.username">
                          </div>
                          <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="text" class="form-control" name="email" ngModel #Useremail="ngModel">
+                            <input type="text" class="form-control" name="email" ngModel #Useremail="ngModel"  [(ngModel)]="user.email">
                          </div>
                          <div class="form-group">
                             <label for="mobile">Mobile</label>
-                            <input type="text" class="form-control" name="mobile" ngModel #Usermobile="ngModel">
+                            <input type="text" class="form-control" name="mobile" ngModel #Usermobile="ngModel"  [(ngModel)]="user.mobile">
                          </div>
                          <div class="form-group">
-                           <button type="submit" class="btn btn-warning">Update Profile</button>
+                           <button type="submit" class="btn btn-warning" (click)="updateUserProfile(profile)">Update Profile</button>
                          </div>
                       </div>
                       <div class="col-md-4 rightBar" style="float:right">
+                         <div class="profile-image">
+                             <img [src]="imageUrl">
+                         </div>
                          <div class="form-group">
-                            <input type="file" name="image" ngModel #userImage="ngModel">
+                            <input type="file" name="image" ngModel #userImage="ngModel" accept="image/*" (change)="handleFileInput($event.target.files)">
                          </div>
                       </div>
                 </div>
