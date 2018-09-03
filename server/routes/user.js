@@ -138,14 +138,14 @@ exports.getuserDetails = function(req, res, next){
     });
 }
 exports.imageUpload=function(req,res,next){
-    
+    console.log(req);
     upload(req,res,function(err){
         if(err){
-            return res.status(501).json({error:err});
+            return res.status(501);
         }
-        console.log(req.file);
+       
         //do all database record saving activity
-    //return res.json({originalname:req.file.name, uploadname:req.file.filename});
+        //return res.json({originalname:req.file.name, uploadname:req.file.filename});
     });
 }
 exports.updateUser = function(req, res, next){

@@ -53,11 +53,12 @@ export class UsersService {
     return this.http.put(`http://localhost:1978/api/profile-update/${user._id}`,JSON.stringify(user),options);
   }
   public uploadImage(image:File){
-    let headers=new Headers({"Authorization":JSON.parse(localStorage.getItem('currentUser')).token});
+    let token=JSON.parse(localStorage.getItem('currentUser')).token
+    let headers=new Headers({"Authorization":token});
     let options=new RequestOptions({headers:headers});
     const formData= new FormData();
     formData.append('image',image,image.name);
-    return this.http.post("http://localhost:1978/api/upload-image",formData,options);
+    return this.http.post("//localhost:1978/api/upload-image",formData,options);
   }
   private handleError(error: Response) {
     console.error(error);

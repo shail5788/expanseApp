@@ -20,12 +20,23 @@ mongoose.connect(config.database, function(err){
 		console.log('Connected to database...');
 	}
 }); 
-
+var storage = multer.diskStorage({
+	// destino del fichero
+	destination: function (req, file, cb) {
+	  cb(null, './uploads/')
+	},
+	// renombrar fichero
+	filename: function (req, file, cb) {
+	  cb(null, file.originalname);
+	}
+  });
+  
+  var upload = multer({ storage: storage });
 // use body parser so we can get info from POST and/or URL parameters
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(require('body-parser').json({ type : '*/*' }));
-app.use(bodyParser.urlencoded({limit: '50mb', extended: false}));
-app.use(bodyParser.json({limit: '50mb'}));
+//app.use(require('body-parser').json({ type : '*/*' }));
+app.use(bodyParser.urlencoded({limit:'50mb',extended: false}));
+app.use(bodyParser.json({limit:'50mb'}));
 
 app.use(express.static(path.join(__dirname ,'uploads')));
 // use morgan to log requests to the console
@@ -64,7 +75,10 @@ apiRoutes.get('/', function(req, res) {
 
 apiRoutes.get('/user/:id', user.getuserDetails); // API returns user details 
 apiRoutes.get("/user-list",user.getUserList);
-apiRoutes.post("/upload-image",user.imageUpload);
+apiRoutes.post("/upload-image",upload.array("image", 1),function(req,res,next){
+	res.status().json({status:true,filepath:req.files[0].path})			
+	
+});
 apiRoutes.post('/user-update', user.updateUser); // API updates user details
 apiRoutes.put("/profile-update/:id",user.userProfileUpdate)
 apiRoutes.put('/password/:id', user.updatePassword); // API updates user password

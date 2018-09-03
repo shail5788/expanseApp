@@ -43,6 +43,12 @@ export class MyProfileComponent implements OnInit {
    }
    console.log(this.fileToUpload);
    reader.readAsDataURL(this.fileToUpload);
-   this.userService.uploadImage(this.fileToUpload).subscribe(data=>{console.log(data)},err=>{console.log(err)})
+   this.userService.uploadImage(this.fileToUpload).subscribe(
+     data=>{
+       if(data.status){this.toastr.success("Image uploaded successfully")
+       console.log(data)
+       } 
+     }
+     ,err=>{console.log(err)})
  }
 }
