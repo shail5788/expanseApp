@@ -3,7 +3,8 @@ var app         = express();
 var bodyParser  = require('body-parser');
 var morgan      = require('morgan');
 var mongoose    = require('mongoose');
-
+var multer		= require('multer');
+var path = require('path');
 var jwt    = require('jsonwebtoken'); 
 var config = require('./config'); 
 
@@ -23,7 +24,10 @@ mongoose.connect(config.database, function(err){
 // use body parser so we can get info from POST and/or URL parameters
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(require('body-parser').json({ type : '*/*' }));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: false}));
+app.use(bodyParser.json({limit: '50mb'}));
 
+app.use(express.static(path.join(__dirname ,'uploads')));
 // use morgan to log requests to the console
 app.use(morgan('dev'));
 
@@ -60,8 +64,9 @@ apiRoutes.get('/', function(req, res) {
 
 apiRoutes.get('/user/:id', user.getuserDetails); // API returns user details 
 apiRoutes.get("/user-list",user.getUserList);
+apiRoutes.post("/upload-image",user.imageUpload);
 apiRoutes.post('/user-update', user.updateUser); // API updates user details
-
+apiRoutes.put("/profile-update/:id",user.userProfileUpdate)
 apiRoutes.put('/password/:id', user.updatePassword); // API updates user password
 
 apiRoutes.post('/expense/:id', expense.saveexpense); // API adds & update expense of the user

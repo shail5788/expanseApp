@@ -12,3 +12,15 @@
     padding: 10px;
 
 }
+.profile-image{
+    width:200px;
+    height:250px;
+    padding:5px;
+    border-radius: 5px;
+    margin:20px 30px;
+    position: relative;
+}
+.profile-image img{
+    height: 200px;
+    border-radius:10px; 
+}

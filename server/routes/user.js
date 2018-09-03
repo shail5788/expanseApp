@@ -2,6 +2,19 @@ var mongoose = require( 'mongoose' );
 var User = require('../models/user');
 var jwt = require('jsonwebtoken'); 
 var config = require('../config');
+var multer=require('multer');
+
+// var store = multer.diskStorage({
+//     destination:function(req,file,cb){
+//         cb(null, './uploads/');
+//     },
+//     filename:function(req,file,cb){
+//         cb(null, Date.now()+'.'+file.name);
+//     }
+// });
+
+
+var upload = multer({dest:'./uploads/',limits: {fileSize: 100000000}}).single('file');
 
 
 exports.signup = function(req, res, next){
@@ -124,6 +137,17 @@ exports.getuserDetails = function(req, res, next){
 	});
     });
 }
+exports.imageUpload=function(req,res,next){
+    
+    upload(req,res,function(err){
+        if(err){
+            return res.status(501).json({error:err});
+        }
+        console.log(req.file);
+        //do all database record saving activity
+    //return res.json({originalname:req.file.name, uploadname:req.file.filename});
+    });
+}
 exports.updateUser = function(req, res, next){
     const firstname = req.body.firstname;
     const lastname = req.body.lastname;
@@ -153,7 +177,36 @@ exports.updateUser = function(req, res, next){
 	});
    }
 }
-
+exports.userProfileUpdate=function(req,res,next){
+    
+    const firstname = req.body.firstname;
+    const lastname = req.body.lastname;
+    const email = req.body.email;
+    const mobile=req.body.mobile;
+	const userid =req.params.id;
+    
+    if (!firstname || !lastname || !email || !userid) {
+        return res.status(422).json({ success: false, message: 'Posted data is not correct or incompleted.'});
+    } else {
+	User.findById(userid).exec(function(err, user){
+		if(err){ res.status(400).json({ success: false, message: 'Error processing request '+ err }); }
+			
+		if(user){
+			user.firstname = firstname;
+			user.lastname = lastname;
+            user.email = email;
+            user.mobile=mobile;
+		}
+		user.save(function(err){
+			if(err){ res.status(400).json({ success: false, message:'Error processing request '+ err }); }
+			res.status(201).json({
+				success: true,
+				message: 'Profile updated successfully'
+			});
+		});
+	});
+   }
+}
 exports.updatePassword = function(req, res, next){
     const userid = req.params.id;
     const oldpassword = req.body.oldpassword;
