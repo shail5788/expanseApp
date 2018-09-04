@@ -10,7 +10,7 @@ var config = require('./config');
 
 var user = require('./routes/user.js');
 var expense = require('./routes/expense.js');
-
+var Upload= require('./models/upload');
 var port = process.env.PORT || config.serverport;
 
 mongoose.connect(config.database, function(err){
@@ -76,7 +76,17 @@ apiRoutes.get('/', function(req, res) {
 apiRoutes.get('/user/:id', user.getuserDetails); // API returns user details 
 apiRoutes.get("/user-list",user.getUserList);
 apiRoutes.post("/upload-image",upload.array("image", 1),function(req,res,next){
-	res.status().json({status:true,filepath:req.files[0].path})			
+	  console.log(req.files[0].path);
+	 let _upload= new Upload({
+		 userid:req.body.userId,
+		 filename:req.files[0].filename,
+		 filepath:req.files[0].path
+	 });
+	 _upload.save((err,upload)=>{
+		  if(err){res.status(301).json({status:false,message:"file not saved"})}
+		 
+	})
+	res.status(200).json({status:true,file:_upload})			
 	
 });
 apiRoutes.post('/user-update', user.updateUser); // API updates user details

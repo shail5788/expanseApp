@@ -6,5 +6,5 @@ export class User{
     username:string;
     password:string;
     mobile:string;
-    
+    role:string
 }

@@ -105,6 +105,18 @@
                           </span>
                         </div>
                     </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <select class="form-control" ngModel required #userType="ngModel" name="UserType" >
+                                <!-- <option [ngValue]="">User Type</option> -->
+                               <option *ngFor="let type of userType" [value]="type.role">{{type.name}}</option>
+                               
+                            </select>
+                            <span *ngIf="userType.touched"  style="font-size:11px;color:red; font-weight: bold">
+                                <span class="text-danger" *ngIf="userType.errors?.required">User type is required</span>
+                            </span>
+                          </div>
+                      </div>
                    </div>
               </div>
             </div>

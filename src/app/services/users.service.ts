@@ -54,11 +54,16 @@ export class UsersService {
   }
   public uploadImage(image:File){
     let token=JSON.parse(localStorage.getItem('currentUser')).token
+    let userId=JSON.parse(localStorage.getItem('currentUser')).user.userid;
     let headers=new Headers({"Authorization":token});
     let options=new RequestOptions({headers:headers});
     const formData= new FormData();
     formData.append('image',image,image.name);
-    return this.http.post("//localhost:1978/api/upload-image",formData,options);
+    formData.append('userId',userId);
+    return this.http.post("//localhost:1978/api/upload-image",formData,options).do(
+      (response:Response)=>{
+         response.json();
+      }).catch(this.handleError);
   }
   private handleError(error: Response) {
     console.error(error);

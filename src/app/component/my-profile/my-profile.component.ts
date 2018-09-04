@@ -45,8 +45,9 @@ export class MyProfileComponent implements OnInit {
    reader.readAsDataURL(this.fileToUpload);
    this.userService.uploadImage(this.fileToUpload).subscribe(
      data=>{
-       if(data.status){this.toastr.success("Image uploaded successfully")
-       console.log(data)
+       let response=data.json();
+       if(response.status){this.toastr.success("Image uploaded successfully")
+       console.log(response)
        } 
      }
      ,err=>{console.log(err)})

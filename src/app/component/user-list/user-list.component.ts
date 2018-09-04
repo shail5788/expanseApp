@@ -17,10 +17,13 @@ export class UserListComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   closeResult: string;
   userList:any[] = [];
+  userType:any=[];
   currentUser:any;
   //user:User[]=[];
   dtTrigger:Subject<any> = new Subject();
-  constructor(private modalService: NgbModal, private modalService2: NgbModal,private UsersService:UsersService,private toastr:ToastrService) {} 
+  constructor(private modalService: NgbModal, private modalService2: NgbModal,private UsersService:UsersService,private toastr:ToastrService) {
+    
+  } 
 
   open2(content) { 
   
@@ -63,11 +66,16 @@ export class UserListComponent implements OnInit {
 
 
   ngOnInit() {
+    this.userType=[
+      {role:"1",name:"Admin"},
+      {role:"2",name:"User"}
+    ];
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10
     };
       //this.renderData();
+    
       this.UsersService.getUsersList().subscribe((response:any)=>{
         response=response.json();
         this.userList=response.data;
